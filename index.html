@@ -637,17 +637,6 @@ footer {
   </div>
 </div>
 
-<!-- SUPABASE (loaded async - site works without it) -->
-<script>
-(function() {
-  var s = document.createElement('script');
-  s.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js';
-  s.onload = function() { window._supabaseReady = true; initSupabase(); };
-  s.onerror = function() { console.warn('Supabase CDN unavailable - running in demo mode.'); };
-  document.head.appendChild(s);
-})();
-</script>
-
 <script>
 // =============================================================
 // CONFIGURATION - replace these values before going live
@@ -1449,6 +1438,16 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
 });
+</script>
+  <!-- SUPABASE (loaded async - site works without it) -->
+<script>
+(function() {
+  var s = document.createElement('script');
+  s.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js';
+  s.onload = function() { window._supabaseReady = true; initSupabase(); };
+  s.onerror = function() { console.warn('Supabase CDN unavailable - running in demo mode.'); };
+  document.head.appendChild(s);
+})();
 </script>
 </body>
 </html>
