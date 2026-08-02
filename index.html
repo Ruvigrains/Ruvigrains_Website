@@ -1191,10 +1191,32 @@ function renderAccountPage() {
 // =============================================================
 function renderDashboard() {
   if (!isOwner()) { showPage('shop'); return; }
-  var allOrders = [];
-  try {
-    allOrders = JSON.parse(localStorage.getItem('ruviOrders') || '[]').reverse();
-  } catch(e) {}
+
+  // Show loading state while fetching
+  document.getElementById('tab-orders').innerHTML = '<p style="padding:1rem;color:var(--text-muted);">Loading orders...</p>';
+  document.getElementById('tab-stats').innerHTML = '<p style="padding:1rem;color:var(--text-muted);">Loading...</p>';
+  document.getElementById('tab-weekly').innerHTML = '<p style="padding:1rem;color:var(--text-muted);">Loading...</p>';
+
+  if (db) {
+    db.from('orders')
+      .select('*')
+      .order('date_ordered', { ascending: false })
+      .then(function(res) {
+        if (res.error) {
+          document.getElementById('tab-orders').innerHTML = '<p style="padding:1rem;color:#c0392b;">Error loading orders: ' + res.error.message + '</p>';
+          return;
+        }
+        _renderDashboardWithData(res.data || []);
+      });
+  } else {
+    // Fallback to localStorage if Supabase not connected
+    var allOrders = [];
+    try { allOrders = JSON.parse(localStorage.getItem('ruviOrders') || '[]').reverse(); } catch(e) {}
+    _renderDashboardWithData(allOrders);
+  }
+}
+
+function _renderDashboardWithData(allOrders) {
 
   var totalRevenue = 0, totalOrders = allOrders.length, pendingOrders = 0, unpaidOrders = 0;
   for (var i = 0; i < allOrders.length; i++) {
@@ -1279,6 +1301,7 @@ function statCard(label, value, sub) {
 }
 
 function markOrder(orderId, updates) {
+  // Update localStorage
   try {
     var orders = JSON.parse(localStorage.getItem('ruviOrders') || '[]');
     for (var i = 0; i < orders.length; i++) {
@@ -1289,8 +1312,24 @@ function markOrder(orderId, updates) {
     }
     localStorage.setItem('ruviOrders', JSON.stringify(orders));
   } catch(e) {}
-  showToast('Order updated.', 'success');
-  renderDashboard();
+
+  // Update Supabase
+  if (db) {
+    db.from('orders')
+      .update(updates)
+      .eq('order_id', orderId)
+      .then(function(res) {
+        if (res.error) {
+          showToast('Local update done but Supabase sync failed: ' + res.error.message, 'error');
+        } else {
+          showToast('Order updated.', 'success');
+        }
+        renderDashboard();
+      });
+  } else {
+    showToast('Order updated locally.', 'success');
+    renderDashboard();
+  }
 }
 
 function exportCSV() {
