@@ -964,8 +964,14 @@ function submitOrder() {
   // Save to Supabase
   if (db) {
     db.from('orders').insert([orderData]).then(function(res) {
-      if (res.error) console.warn('Supabase insert:', res.error);
+      if (res.error) {
+        console.warn('Supabase insert error:', res.error);
+        showToast('Order saved locally. Sync error: ' + res.error.message, 'error');
+      }
     });
+  } else {
+    console.warn('Supabase not initialised - db is null');
+    showToast('Supabase not connected - order saved locally only', 'error');
   }
 
   // Sync to Google Sheet via GAS webhook
