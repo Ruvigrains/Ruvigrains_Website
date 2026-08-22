@@ -542,7 +542,7 @@ footer {
 
     <section class="hero" aria-label="Ruvi Grains banner">
       <img
-        src = "images/Hero_Banner.WEBP"
+        src = "images/Hero_Banner.webp"
         alt="Ruvi Grains – Freshly Milled. Naturally Better."
         style="width:100%;height:auto;display:block;vertical-align:bottom;"
       />
@@ -683,23 +683,24 @@ var currentPage = 'shop';
 // PRODUCTS
 // =============================================================
 var PRODUCTS = [
-  { id:1,  name:'Whole Wheat (Atta) Flour', sub:'Stone-ground whole wheat',             price:7.00,  weight:'5 kg', img:'images/Whole_Wheat_Atta.webp' },
-  { id:2,  name:'Ragi Flour',               sub:'Finger millet, rich in calcium',       price:7.00,  weight:'1 kg', img: 'images/Ragi_Flour.webp' },
-  { id:3,  name:'Udad Flour',               sub:'Urad dal, great for idli and dosa',    price:5.00,  weight:'1 kg', img: 'images/Udad_Flour.webp' },
-  { id:4,  name:'Bajri Flour',              sub:'Pearl millet, traditional bhakri',     price:7.00,  weight:'1 kg', img: 'images/Bajri_Flour.webp' },
-  { id:5,  name:'Jowar Flour',              sub:'Sorghum, gluten-free staple',          price:6.50,  weight:'1 kg', img: 'images/Jowar_Flour.webp' },
-  { id:6,  name:'Besan Flour',              sub:'Chickpea flour for pakoras and more',  price:4.75,  weight:'1 kg', img: 'images/Besan_Flour.webp' },
-  { id:7,  name:'Multigrain Flour',         sub:'Blend of premium grains',              price:17.50, weight:'5 kg', img: 'images/Multigrain_Flour.webp' },
-  { id:8,  name:'Laddu Besan',              sub:'Coarse chickpea flour for laddus',     price:4.75,  weight:'1 kg', img: 'images/Laddu_Besan_Flour.webp' },
-  { id:9,  name:'Makai Flour',              sub:'Corn flour, makki di roti',            price:6.00,  weight:'1 kg', img: 'images/Makai_Flour.webp' },
-  { id:10, name:'Foxtail Millet Flour',     sub:'Nutritious ancient grain',             price:7.00,  weight:'1 kg', img: 'images/Foxtail_Millet.webp' },
-  { id:11, name:'Soybean Flour',            sub:'High protein flour',                   price:6.00,  weight:'1 kg', img: 'images/Soyabean_Flour.webp' },
-  { id:12, name:'Idli Flour',               sub:'Ready-blend for soft idlis',           price:5.00,  weight:'1 kg', img: 'images/Idli_Flour.webp' },
-  { id:13, name:'Dhokla / Handva Flour',    sub:'Fermented savoury snack blend',        price:5.50,  weight:'1 kg', img: 'images/Dhokla_Flour.webp' },
-  { id:14, name:'Rice Flour',               sub:'Fine milled rice flour',               price:4.00,  weight:'1 kg', img: 'images/Rice_Flour.webp' },
-  { id:15, name:'Barley (Jav) Flour',       sub:'Nutritious barley flour',              price:4.00,  weight:'1 kg', img: 'images/Barley_Flour.webp' },
-  { id:16, name:'Bhakri Flour',             sub:'Traditional flatbread blend',          price:2.50,  weight:'1 kg', img: 'images/Bhakri_Flour.webp' },
-  { id:17, name:'Churma Laddu Flour',       sub:'Speciality laddu blend',               price:3.00,  weight:'1 kg', img: 'images/Churma_Laddu_Flour.webp' },
+  { id:1,  name:'Whole Wheat (Atta) Flour (Coarse)', sub:'Stone-ground whole wheat',             price:7.00,  weight:'5 kg', img:'images/Whole_Wheat_Atta.webp' },
+  { id:2,  name:'Ragi Flour',                        sub:'Finger millet, rich in calcium',       price:7.00,  weight:'1 kg', img: 'images/Ragi_Flour.webp' },
+  { id:3,  name:'Udad Flour',                        sub:'Urad dal, great for idli and dosa',    price:5.00,  weight:'1 kg', img: 'images/Udad_Flour.webp' },
+  { id:4,  name:'Bajri Flour',                       sub:'Pearl millet, traditional bhakri',     price:7.00,  weight:'1 kg', img: 'images/Bajri_Flour.webp' },
+  { id:5,  name:'Jowar Flour',                       sub:'Sorghum, gluten-free staple',          price:6.50,  weight:'1 kg', img: 'images/Jowar_Flour.webp' },
+  { id:6,  name:'Besan Flour',                       sub:'Chickpea flour for pakoras and more',  price:4.75,  weight:'1 kg', img: 'images/Besan_Flour.webp' },
+  { id:7,  name:'Multigrain Flour',                  sub:'Blend of premium grains',              price:17.50, weight:'5 kg', img: 'images/Multigrain_Flour.webp' },
+  { id:8,  name:'Laddu Besan',                       sub:'Coarse chickpea flour for laddus',     price:4.75,  weight:'1 kg', img: 'images/Laddu_Besan_Flour.webp' },
+  { id:9,  name:'Makai Flour',                       sub:'Corn flour, makki di roti',            price:6.00,  weight:'1 kg', img: 'images/Makai_Flour.webp' },
+  { id:10, name:'Foxtail Millet Flour',              sub:'Nutritious ancient grain',             price:7.00,  weight:'1 kg', img: 'images/Foxtail_Millet.webp' },
+  { id:11, name:'Soybean Flour',                     sub:'High protein flour',                   price:6.00,  weight:'1 kg', img: 'images/Soyabean_Flour.webp' },
+  { id:12, name:'Idli Flour',                        sub:'Ready-blend for soft idlis',           price:5.00,  weight:'1 kg', img: 'images/Idli_Flour.webp' },
+  { id:13, name:'Dhokla / Handva Flour',             sub:'Fermented savoury snack blend',        price:5.50,  weight:'1 kg', img: 'images/Dhokla_Flour.webp' },
+  { id:14, name:'Rice Flour',                        sub:'Fine milled rice flour',               price:4.00,  weight:'1 kg', img: 'images/Rice_Flour.webp' },
+  { id:15, name:'Barley (Jav) Flour',                sub:'Nutritious barley flour',              price:4.00,  weight:'1 kg', img: 'images/Barley_Flour.webp' },
+  { id:16, name:'Bhakri Flour',                      sub:'Traditional flatbread blend',          price:2.50,  weight:'1 kg', img: 'images/Bhakri_Flour.webp' },
+  { id:17, name:'Churma Laddu Flour',                sub:'Speciality laddu blend',               price:3.00,  weight:'1 kg', img: 'images/Churma_Laddu_Flour.webp' },
+  { id:18, name:'Whole Wheat (Atta) Flour (Fine)',   sub:'Stone-ground whole wheat',             price:7.00,  weight:'5 kg', img:'images/Whole_Wheat_Atta.webp' },
 ];
 
 // =============================================================
