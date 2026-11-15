@@ -606,8 +606,8 @@ footer {
     </div>
     <div class="footer-col">
       <h3>Contact</h3>
-      <p>Rushabh Patel</p>
-      <a href="tel:0430805555">0417 797 794</a>
+      <p>Ruvi Grains Pty Ltd</p><p>Werribee, Victoria, Australia</p><p>Contact: Rushabh Patel</p><a href="mailto:info@ruvigrains.com.au">info@ruvigrains.com.au</a>
+      <a href="tel:+61417797794">0417 797 794</a>
       <p>ABN: 52 687 963 024</p>
     </div>
     <div class="footer-col">
@@ -617,7 +617,7 @@ footer {
     </div>
     <div class="footer-col">
       <h3>More</h3>
-      <button class="footer-link-btn" id="nutritionLink">Nutritional Information</button>
+      <button class="footer-link-btn" id="nutritionLink">Nutritional Information</button><a href="#legal-privacy" onclick="openLegalPage('privacy');return false;">Privacy Policy</a><a href="#legal-terms" onclick="openLegalPage('terms');return false;">Terms &amp; Conditions</a><a href="#legal-refunds" onclick="openLegalPage('refunds');return false;">Refunds &amp; Returns</a>
     </div>
   </div>
   <div class="footer-bottom">
@@ -930,6 +930,7 @@ function renderCheckout() {
     + '<div class="payid-details" id="payidDetails"><strong>PayID Details</strong><br/>PayID: <strong>0417 797 794</strong> (Phone)<br/>Account Name: <strong>Rushabh Patel / Ruvi Grains</strong><br/><span style="font-size:.78rem;color:var(--text-muted);">Use your name as the payment reference. Your order will be confirmed once payment is received.</span></div>'
     + '</fieldset>'
     + '<div class="form-group"><label for="co_notes">Special Instructions (optional)</label><textarea id="co_notes" rows="2" placeholder="Any requests or notes..." style="resize:vertical;"></textarea></div>'
+    + '<label><input type=checkbox id=co_whatsapp_optin> I agree to receive optional Ruvi Grains offers and delivery announcements on WhatsApp. I can opt out by replying STOP. Not required for ordering.</label>'
     + '<button type="button" class="btn-primary" id="placeOrderBtn" style="width:100%;">Place Order</button>'
     + '</div>';
 
@@ -971,6 +972,8 @@ function submitOrder() {
   var paymentType = payEl ? payEl.value : 'payid';
   var notesEl = document.getElementById('co_notes');
   var notes = notesEl ? notesEl.value : '';
+  var marketingCheckbox = document.getElementById('co_whatsapp_optin');
+  if (marketingCheckbox && marketingCheckbox.checked) { notes += (notes ? '\n' : '') + '[WhatsApp marketing opt-in: YES; recorded ' + new Date().toISOString() + '; source: website checkout]'; }
   var orderId = 'RG-' + Date.now().toString(36).toUpperCase();
 
   var customerName  = currentUser ? (currentUser.user_metadata && currentUser.user_metadata.full_name ? currentUser.user_metadata.full_name : currentUser.email) : document.getElementById('co_name').value;
@@ -1588,5 +1591,21 @@ document.addEventListener('DOMContentLoaded', function() {
   <button class="lightbox-close" id="lightboxClose" aria-label="Close image">&#10005;</button>
   <img class="lightbox-img" id="lightboxImg" src="" alt="" />
 </div>
+
+<!-- Customer information and policies: accessible independently of account or checkout -->
+<div id="legalOverlay" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="legalTitle">
+  <div class="modal" style="max-width:760px"><div class="modal-header"><h2 id="legalTitle">Business information</h2><button class="modal-close" onclick="closeLegalPage()" aria-label="Close policy">✕</button></div>
+  <div class="modal-body" id="legalContent" style="max-height:70vh;overflow:auto"></div></div>
+</div>
+<script>
+var RUVI_POLICIES = {
+ privacy: {title:'Privacy Policy',html:`<p><strong>Ruvi Grains Pty Ltd</strong> (ABN 52 687 963 024), Werribee, Victoria, Australia.</p><p>Contact: <a href="mailto:info@ruvigrains.com.au">info@ruvigrains.com.au</a> or <a href="tel:+61417797794">0417 797 794</a>.</p><h3>Information we collect</h3><p>When you place an order or create an account, we may collect your name, email address, telephone number, order details, payment selection, delivery or pickup instructions, and account details. We use this information to process orders, communicate with you, provide customer support and maintain business records.</p><h3>Service providers</h3><p>Our website uses Supabase for account and order functions and a Google Apps Script integration for order administration. Relevant information may be processed by those providers to deliver these services.</p><h3>WhatsApp communications</h3><p>We may contact you about orders you have placed. Promotional WhatsApp messages are optional and require your separate consent. You can opt out of marketing at any time by replying STOP or contacting us. Opting out does not prevent essential communications about your orders.</p><h3>Access and correction</h3><p>Contact us to request access to, correction of, or deletion of personal information, subject to applicable recordkeeping obligations. We take reasonable steps to protect information but no online transmission is entirely risk-free.</p><p><em>Last updated: 15 November 2026.</em></p>`},
+ terms: {title:'Terms & Conditions',html:`<p>Ruvi Grains Pty Ltd (ABN 52 687 963 024) supplies flour products in Victoria, Australia. Product availability, prices and package sizes are shown at checkout and may change before an order is placed.</p><h3>Orders and payment</h3><p>Submitting an order requests the listed products. We will contact you if an item is unavailable or an order cannot be fulfilled. Payment options are shown at checkout. Orders requiring advance payment are confirmed after payment is received.</p><h3>Delivery and pickup</h3><p>Delivery availability, minimum order requirements, delivery dates and pickup arrangements should be confirmed with us before placing an order. Do not assume delivery is available to every address.</p><h3>Product information</h3><p>Check product labels for ingredients and allergen information before consumption. Contact us if you need additional product details.</p><h3>Australian Consumer Law</h3><p>Nothing in these terms excludes or limits rights or guarantees that cannot lawfully be excluded under the Australian Consumer Law.</p><p>Questions: <a href="mailto:info@ruvigrains.com.au">info@ruvigrains.com.au</a>.</p><p><em>Last updated: 15 November 2026.</em></p>`},
+ refunds: {title:'Refunds & Returns',html:`<p>Ruvi Grains Pty Ltd aims to supply products in good condition and as described.</p><h3>Problems with your order</h3><p>If an item is incorrect, damaged, defective or not as described, please contact us promptly at <a href="mailto:info@ruvigrains.com.au">info@ruvigrains.com.au</a> or <a href="tel:+61417797794">0417 797 794</a> with your order details and, where useful, photos.</p><h3>Remedies</h3><p>We will assess the issue and provide a remedy required by Australian Consumer Law, which may include a replacement, refund or other appropriate remedy. Consumer guarantees apply to food products as well as other goods.</p><h3>Change of mind</h3><p>Because flour is a food product, change-of-mind returns may not be accepted, particularly after opening. This does not affect your statutory consumer rights.</p><p><em>Last updated: 15 November 2026.</em></p>`}
+};
+function openLegalPage(key){var p=RUVI_POLICIES[key];if(!p)return;document.getElementById('legalTitle').textContent=p.title;document.getElementById('legalContent').innerHTML=p.html;document.getElementById('legalOverlay').classList.add('open');}
+function closeLegalPage(){document.getElementById('legalOverlay').classList.remove('open');}
+</script>
+
 </body>
 </html>
